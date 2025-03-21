@@ -55,16 +55,15 @@ public class MockBookService implements BookService {
 
     @Override
     public void update(Book book) {
-        Optional<Book> bookToUpdate = get(book.getId());
+        Long id = book.getId();
+        Optional<Book> bookToUpdate = get(id);
         if (bookToUpdate.isPresent()) {
-            int index = list.indexOf(book);
+            int index = list.indexOf(bookToUpdate.get());
             list.set(index, book);
-//        } else {
-//
-//        }
+        } else {
+            throw new BookNotFoundException("Book with id " + book.getId() + " not found");
+        }
 
-
-    }
     }
 
 }

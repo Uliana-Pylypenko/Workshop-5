@@ -3,6 +3,7 @@ package pl.coderslab.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.model.Book;
+import pl.coderslab.model.BookNotFoundException;
 import pl.coderslab.model.BookRequest;
 import pl.coderslab.model.BookService;
 
@@ -36,13 +37,16 @@ public class BookController {
         return bookService.get(id).orElse(null);
     }
 
-//    @PutMapping
-//    public String updateBook(@RequestBody Book book) {
-//        Optional<Book> bookToUpdate = bookService.get(book.getId());
-//        if (bookToUpdate.isPresent()) {
-//        }
-//
-//    }
+    @PutMapping
+    public String updateBook(@RequestBody Book book) {
+        try {
+            bookService.update(book);
+            return book.toString() + " updated";
+        } catch (BookNotFoundException e) {
+            return e.getMessage();
+        }
+
+    }
 
 
 }
