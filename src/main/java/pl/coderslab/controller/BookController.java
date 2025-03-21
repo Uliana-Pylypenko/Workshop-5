@@ -1,18 +1,49 @@
 package pl.coderslab.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.model.Book;
+import pl.coderslab.model.BookRequest;
+import pl.coderslab.model.BookService;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/books")
 public class BookController {
+    private BookService bookService;
 
-    @RequestMapping("/helloBook")
-    public Book helloBook() {
-        Book book = new Book(1, "9788324631766", "Thinking in Java",
-                "Bruce Eckel", "Helion", "programming");
-        return book;
+    @Autowired
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
     }
+
+    @GetMapping
+    public List<Book> getAllBooks() {
+        return bookService.getBooks();
+    }
+
+    @PostMapping
+    public String addBook(@RequestBody Book book) {
+        bookService.add(book);
+        return book.toString() + " added";
+    }
+
+    @GetMapping("/{id}")
+    public Book getBookById(@PathVariable Long id) {
+        return bookService.get(id).orElse(null);
+    }
+
+//    @PutMapping
+//    public String updateBook(@RequestBody Book book) {
+//        Optional<Book> bookToUpdate = bookService.get(book.getId());
+//        if (bookToUpdate.isPresent()) {
+//        }
+//
+//    }
+
+
 }
 

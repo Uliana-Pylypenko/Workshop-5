@@ -1,7 +1,9 @@
 package pl.coderslab.model;
 
+import org.apache.commons.logging.Log;
+
 public class Book {
-    private int id;
+    private Long id;
     private String isbn;
     private String title;
     private String author;
@@ -10,7 +12,7 @@ public class Book {
 
     public Book() {}
 
-    public Book(int id, String isbn, String title, String author, String publisher, String type) {
+    public Book(Long id, String isbn, String title, String author, String publisher, String type) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
@@ -19,11 +21,11 @@ public class Book {
         this.type = type;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
