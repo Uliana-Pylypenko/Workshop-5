@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +26,9 @@ public class MockBookService implements BookService {
         list.add(new Book(10L, "978-0-596-51774-8", "Refactoring: Improving the Design of Existing Code", "Martin Fowler", "Addison-Wesley", "Programming"));
     }
 
+    private static Long nextId = 10L;
+
+
     @Override
     public List<Book> getBooks() {
         return list;
@@ -41,10 +43,7 @@ public class MockBookService implements BookService {
 
     @Override
     public void add(Book book) {
-        Optional<Book> maxIdBook = list.stream().max(Comparator.comparingLong(Book::getId));
-        if (maxIdBook.isPresent()) {
-            book.setId(maxIdBook.get().getId() + 1L);
-        }
+        book.setId(nextId++);
         list.add(book);
     }
 

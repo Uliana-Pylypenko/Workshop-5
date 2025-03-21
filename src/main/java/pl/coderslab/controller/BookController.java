@@ -7,9 +7,7 @@ import pl.coderslab.model.BookNotFoundException;
 import pl.coderslab.model.BookRequest;
 import pl.coderslab.model.BookService;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/books")
