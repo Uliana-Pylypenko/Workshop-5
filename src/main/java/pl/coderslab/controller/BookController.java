@@ -45,7 +45,12 @@ public class BookController {
         } catch (BookNotFoundException e) {
             return e.getMessage();
         }
+    }
 
+    @DeleteMapping("/{id}")
+    public String deleteBook(@PathVariable Long id) {
+        bookService.delete(id);
+        return "Book with id " + id + " deleted";
     }
 
 

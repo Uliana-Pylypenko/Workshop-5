@@ -50,7 +50,7 @@ public class MockBookService implements BookService {
 
     @Override
     public void delete(Long id) {
-
+        list.removeIf(book -> book.getId().equals(id));
     }
 
     @Override
